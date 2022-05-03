@@ -127,6 +127,9 @@ export default class ProfileEntryPanel extends Component {
       displayName: this.props.displayNameOverride ? this.props.displayNameOverride : this.state.displayName,
       displayNamePattern: this.props.store.schema.definitions.profile.properties.displayName.pattern,
       onChangeDisplayName: e => this.setState({ displayName: e.target.value }),
+      onChangeDisplayNameEns: name => {
+        this.setState({ displayName: name });
+      },
       avatarPreview: <AvatarPreview avatarGltfUrl={this.state.avatar && this.state.avatar.gltf_url} />,
       onChangeAvatar: e => {
         e.preventDefault();

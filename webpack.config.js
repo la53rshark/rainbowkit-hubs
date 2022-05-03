@@ -268,7 +268,7 @@ module.exports = async (env, argv) => {
     node: {
       // need to specify this manually because some random lodash code will try to access
       // Buffer on the global object if it exists, so webpack will polyfill on its behalf
-      Buffer: false,
+      Buffer: true,
       fs: "empty"
     },
     entry: {
@@ -497,6 +497,12 @@ module.exports = async (env, argv) => {
           use: { loader: "raw-loader" }
         }
       ]
+    },
+    resolve: {
+      alias: {
+        stream: require.resolve("stream-browserify"),
+        buffer: require.resolve("buffer")
+      }
     },
 
     optimization: {

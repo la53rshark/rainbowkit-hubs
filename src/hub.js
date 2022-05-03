@@ -8,6 +8,7 @@ import "./utils/debug-log";
 import configs from "./utils/configs";
 import "./utils/theme";
 import "@babel/polyfill";
+import { MetaMaskProvider } from "metamask-react";
 
 console.log(
   `App version: ${
@@ -333,32 +334,34 @@ function mountUI(props = {}) {
 
   ReactDOM.render(
     <WrappedIntlProvider>
-      <ThemeProvider store={store}>
-        <Router history={history}>
-          <Route
-            render={routeProps =>
-              props.showOAuthScreen ? (
-                <OAuthScreenContainer oauthInfo={props.oauthInfo} />
-              ) : props.roomUnavailableReason ? (
-                <ExitedRoomScreenContainer reason={props.roomUnavailableReason} />
-              ) : (
-                <UIRoot
-                  {...{
-                    scene,
-                    isBotMode,
-                    disableAutoExitOnIdle,
-                    forcedVREntryType,
-                    store,
-                    mediaSearchStore,
-                    ...props,
-                    ...routeProps
-                  }}
-                />
-              )
-            }
-          />
-        </Router>
-      </ThemeProvider>
+      <MetaMaskProvider>
+        <ThemeProvider store={store}>
+          <Router history={history}>
+            <Route
+              render={routeProps =>
+                props.showOAuthScreen ? (
+                  <OAuthScreenContainer oauthInfo={props.oauthInfo} />
+                ) : props.roomUnavailableReason ? (
+                  <ExitedRoomScreenContainer reason={props.roomUnavailableReason} />
+                ) : (
+                  <UIRoot
+                    {...{
+                      scene,
+                      isBotMode,
+                      disableAutoExitOnIdle,
+                      forcedVREntryType,
+                      store,
+                      mediaSearchStore,
+                      ...props,
+                      ...routeProps
+                    }}
+                  />
+                )
+              }
+            />
+          </Router>
+        </ThemeProvider>
+      </MetaMaskProvider>
     </WrappedIntlProvider>,
     document.getElementById("ui-root")
   );
