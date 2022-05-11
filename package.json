@@ -78,6 +78,7 @@
     "@mozillareality/easing-functions": "^0.1.1",
     "@mozillareality/three-batch-manager": "github:mozillareality/three-batch-manager#master",
     "@popperjs/core": "^2.4.4",
+    "@rainbow-me/rainbowkit": "^0.1.0",
     "aframe": "github:mozillareality/aframe#hubs/master",
     "aframe-rounded": "^1.0.3",
     "aframe-slice9-component": "github:takahirox/aframe-slice9-component#AlphaTest",
@@ -147,6 +148,7 @@
     "troika-three-text": "^0.45.0",
     "use-clipboard-copy": "^0.1.2",
     "uuid": "^3.2.1",
+    "wagmi": "^0.3.5",
     "webrtc-adapter": "^7.7.0",
     "webxr-polyfill": "^2.0.3",
     "zip-loader": "^1.1.0"

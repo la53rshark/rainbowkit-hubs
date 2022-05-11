@@ -447,6 +447,11 @@ module.exports = async (env, argv) => {
           ]
         },
         {
+          include: /node_modules/,
+          test: /\.mjs$/,
+          type: "javascript/auto"
+        },
+        {
           test: /\.svg$/,
           include: [path.resolve(__dirname, "src", "react-components")],
           use: [

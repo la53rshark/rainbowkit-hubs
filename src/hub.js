@@ -10,6 +10,10 @@ import "./utils/theme";
 import "@babel/polyfill";
 import { MetaMaskProvider } from "metamask-react";
 
+import { apiProvider, configureChains, RainbowKitProvider, getDefaultWallets, darkTheme } from "@rainbow-me/rainbowkit";
+import { createClient, chain, WagmiProvider } from "wagmi";
+import { providers } from "ethers";
+
 console.log(
   `App version: ${
     configs.IS_LOCAL_OR_CUSTOM_CLIENT
@@ -20,6 +24,7 @@ console.log(
 
 import "./react-components/styles/global.scss";
 import "./assets/stylesheets/globals.scss";
+import "@rainbow-me/rainbowkit/styles.css";
 import "./assets/stylesheets/hub.scss";
 import initialBatchImage from "./assets/images/warning_icon.png";
 import loadingEnvironment from "./assets/models/LoadingEnvironment.glb";
@@ -326,6 +331,22 @@ window.APP.history = history;
 
 const qsVREntryType = qs.get("vr_entry_type");
 
+const { provider, chains } = configureChains(
+  [chain.mainnet],
+  [apiProvider.alchemy(process.env.ALCHEMY_ID), apiProvider.fallback()]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: "Hubs Rainbowkit",
+  chains
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider
+});
+
 function mountUI(props = {}) {
   const scene = document.querySelector("a-scene");
   const disableAutoExitOnIdle =
@@ -334,34 +355,38 @@ function mountUI(props = {}) {
 
   ReactDOM.render(
     <WrappedIntlProvider>
-      <MetaMaskProvider>
-        <ThemeProvider store={store}>
-          <Router history={history}>
-            <Route
-              render={routeProps =>
-                props.showOAuthScreen ? (
-                  <OAuthScreenContainer oauthInfo={props.oauthInfo} />
-                ) : props.roomUnavailableReason ? (
-                  <ExitedRoomScreenContainer reason={props.roomUnavailableReason} />
-                ) : (
-                  <UIRoot
-                    {...{
-                      scene,
-                      isBotMode,
-                      disableAutoExitOnIdle,
-                      forcedVREntryType,
-                      store,
-                      mediaSearchStore,
-                      ...props,
-                      ...routeProps
-                    }}
-                  />
-                )
-              }
-            />
-          </Router>
-        </ThemeProvider>
-      </MetaMaskProvider>
+      <WagmiProvider client={wagmiClient}>
+        <RainbowKitProvider theme={darkTheme()} chains={chains}>
+          <MetaMaskProvider>
+            <ThemeProvider store={store}>
+              <Router history={history}>
+                <Route
+                  render={routeProps =>
+                    props.showOAuthScreen ? (
+                      <OAuthScreenContainer oauthInfo={props.oauthInfo} />
+                    ) : props.roomUnavailableReason ? (
+                      <ExitedRoomScreenContainer reason={props.roomUnavailableReason} />
+                    ) : (
+                      <UIRoot
+                        {...{
+                          scene,
+                          isBotMode,
+                          disableAutoExitOnIdle,
+                          forcedVREntryType,
+                          store,
+                          mediaSearchStore,
+                          ...props,
+                          ...routeProps
+                        }}
+                      />
+                    )
+                  }
+                />
+              </Router>
+            </ThemeProvider>
+          </MetaMaskProvider>
+        </RainbowKitProvider>
+      </WagmiProvider>
     </WrappedIntlProvider>,
     document.getElementById("ui-root")
   );

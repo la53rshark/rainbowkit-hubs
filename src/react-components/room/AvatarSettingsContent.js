@@ -8,6 +8,8 @@ import { FormattedMessage } from "react-intl";
 import { useMetaMask } from "metamask-react";
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import namehash from "@ensdomains/eth-ens-namehash";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 
 export function AvatarSettingsContent({
   displayName,
@@ -32,7 +34,12 @@ export function AvatarSettingsContent({
 
   return (
     <Column as="form" className={styles.content} {...rest}>
-      {status === "notConnected" && <Button onClick={connect}>Connect to MetaMask</Button>}
+      {status === "notConnected" && (
+        <>
+          <Button onClick={connect}>Connect to MetaMask</Button>
+          <ConnectButton />
+        </>
+      )}
       {status === "connecting" && <div>Connecting...</div>}
       {status === "connected" && <div>Connected account: {account}</div>}
       {status === "connected" && (
