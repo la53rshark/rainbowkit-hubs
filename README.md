@@ -1,4 +1,4 @@
-# Mozilla Hubs Metamask+ENS Integration
+# Mozilla Hubs Rainbowkit+ENS Integration
 THIS REPO IS FOR DEMONSTRATION PURPOSES AT THE MOMENT AND SHOULD NOT BE USED IN ANY PRODUCTION CAPACITY. 
 
 > If this repo helped you, feel free to send coin or wares to `la53rshark.eth` as a thank you.
