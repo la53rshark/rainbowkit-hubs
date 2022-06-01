@@ -7,9 +7,7 @@ import { Column } from "../layout/Column";
 import { FormattedMessage } from "react-intl";
 import { useMetaMask } from "metamask-react";
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
-import namehash from "@ensdomains/eth-ens-namehash";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-
 
 export function AvatarSettingsContent({
   displayName,
@@ -23,7 +21,7 @@ export function AvatarSettingsContent({
   ...rest
 }) {
   const [ensName, ensNameSet] = useState("");
-  const { status, connect, account } = useMetaMask();
+  const { status, account } = useMetaMask();
 
   async function pingEnsThings() {
     const ens = new ENS({ provider: window.ethereum, ensAddress: getEnsAddress("1") });
@@ -36,12 +34,10 @@ export function AvatarSettingsContent({
     <Column as="form" className={styles.content} {...rest}>
       {status === "notConnected" && (
         <>
-          <Button onClick={connect}>Connect to MetaMask</Button>
           <ConnectButton />
         </>
       )}
       {status === "connecting" && <div>Connecting...</div>}
-      {status === "connected" && <div>Connected account: {account}</div>}
       {status === "connected" && (
         <>
           <Button onClick={() => pingEnsThings(ensName)}>Set ENS name.</Button>

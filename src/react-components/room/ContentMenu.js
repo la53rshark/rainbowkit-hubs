@@ -6,6 +6,7 @@ import styles from "./ContentMenu.scss";
 import { ReactComponent as ObjectsIcon } from "../icons/Objects.svg";
 import { ReactComponent as PeopleIcon } from "../icons/People.svg";
 import { FormattedMessage } from "react-intl";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export function ContentMenuButton({ active, children, ...props }) {
   return (
@@ -28,6 +29,14 @@ export function ObjectsMenuButton(props) {
         <FormattedMessage id="content-menu.objects-menu-button" defaultMessage="Objects" />
       </span>
     </ContentMenuButton>
+  );
+}
+
+export function RainbowKitButton() {
+  return (
+    <>
+      <ConnectButton showBalance={false} />
+    </>
   );
 }
 

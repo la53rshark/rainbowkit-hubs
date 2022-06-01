@@ -24,7 +24,7 @@ console.log(
 
 import "./react-components/styles/global.scss";
 import "./assets/stylesheets/globals.scss";
-import "@rainbow-me/rainbowkit/styles.css";
+// import '@rainbow-me/rainbowkit/styles.css';
 import "./assets/stylesheets/hub.scss";
 import initialBatchImage from "./assets/images/warning_icon.png";
 import loadingEnvironment from "./assets/models/LoadingEnvironment.glb";
