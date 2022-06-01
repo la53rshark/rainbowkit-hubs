@@ -1,10 +1,11 @@
-# [Mozilla Hubs](https://hubs.mozilla.com/)
+# Mozilla Hubs Metamask+ENS Integration
+THIS REPO IS FOR DEMONSTRATION PURPOSES AT THE MOMENT AND SHOULD NOT BE USED IN ANY PRODUCTION CAPACITY. 
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Build Status](https://travis-ci.org/mozilla/hubs.svg?branch=master)](https://travis-ci.org/mozilla/hubs) [![Discord](https://img.shields.io/discord/498741086295031808)](https://discord.gg/CzAbuGu)
+> If this repo helped you, feel free to send coin or wares to `la53rshark.eth` as a thank you.
 
-The client-side code for [Mozilla Hubs](https://hubs.mozilla.com/), an online 3D collaboration platform that works for desktop, mobile, and VR platforms.
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
-[Learn more about Hubs](https://hubs.mozilla.com/docs/welcome.html)
+The client-side code for [Mozilla Hubs](https://hubs.mozilla.com/), an online 3D collaboration platform that works for desktop, mobile, and VR platforms modified to connect with metamask and ens.
 
 ## Getting Started
 
@@ -23,31 +24,33 @@ If you just want to check out how Hubs works and make your own modifications con
 Run the following commands:
 
 ```bash
-git clone https://github.com/mozilla/hubs.git
+git clone git@github.com:la53rshark/hubs-metamask-ens.git
 cd hubs
 npm ci
 npm run dev
 ```
+make a file called `.env` that contains the following env vars.
+```
+host=hubs.local
+HOST_IP=hubs.local
+```
 
-Then visit https://localhost:8080 (note: HTTPS is required, you'll need to accept the warning for the self-signed SSL certificate)
+If you want to deploy, run the following
 
-> Note: When running the Hubs client locally, you will still connect to the development versions of our [Janus WebRTC](https://github.com/mozilla/janus-plugin-sfu) and [reticulum](https://github.com/mozilla/reticulum) servers. These servers do not allow being accessed outside of localhost. If you want to host your own Hubs servers, please check out [Hubs Cloud](https://hubs.mozilla.com/docs/hubs-cloud-intro.html).
+```
+npm run login
+```
+
+Follow the instructions for your Hubs Cloud instance details.
+
+```
+npm run deploy
+```
+
 
 ## Documentation
 
 The Hubs documentation can be found [here](https://hubs.mozilla.com/docs).
-
-## Community
-
-Join us on our [Discord Server](https://discord.gg/CzAbuGu) or [follow us on Twitter](https://twitter.com/MozillaHubs).
-
-## Contributing
-
-Read our [contributor guide](./CONTRIBUTING.md) to learn how you can submit bug reports, feature requests, and pull requests.
-
-We're also looking for help with localization. The Hubs redesign has a lot of new text and we need help from people like you to translate it. Follow the [localization docs](./src/assets/locales/README.md) to get started.
-
-Contributors are expected to abide by the project's [Code of Conduct](./CODE_OF_CONDUCT.md) and to be respectful of the project and people working on it. 
 
 ## Additional Resources
 
@@ -56,10 +59,6 @@ Contributors are expected to abide by the project's [Code of Conduct](./CODE_OF_
 * [Janus Gateway](https://github.com/meetecho/janus-gateway) - A WebRTC proxy used for centralizing network traffic in this client.
 * [Janus SFU Plugin](https://github.com/mozilla/janus-plugin-sfu) - Plugins for Janus which enables it to act as a SFU.
 * [Hubs-Ops](https://github.com/mozilla/hubs-ops) - Infrastructure as code + management tools for running necessary backend services on AWS.
-
-## Privacy
-
-Mozilla and Hubs believe that privacy is fundamental to a healthy internet. Read our [privacy policy](./PRIVACY.md) for more info.
 
 ## License
 
